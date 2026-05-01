@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Ayush Negi — Developer & Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ░░ LOADER ░░ -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <p class="loader-txt" id="loaderTxt">Initializing...</p>
+  </div>
+</div>
+
+<!-- ░░ CURSOR ░░ -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot"  id="cursorDot"></div>
+
+<!-- ░░ SCANLINES ░░ -->
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- ░░ NAV ░░ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <span class="logo" onclick="go('home')">
+      <span class="logo-bracket">[</span>AN<span class="logo-bracket">]</span>
+    </span>
+    <div class="nav-links" id="navLinks"></div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">◑</button>
+      <button class="ham-btn" id="hamBtn" aria-label="Menu">≡</button>
+    </div>
+  </div>
+  <div class="mob-menu" id="mobMenu"></div>
+</nav>
+
+<!-- ░░ HERO ░░ -->
+<section id="home" class="hero-section">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+
+  <div class="hero-content">
+
+    <!-- LEFT: text -->
+    <div class="hero-left">
+      <div class="status-tag">
+        <span class="status-dot"></span>
+        <span class="status-mono">STATUS: OPEN_TO_CONNECT</span>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="name-line name-line-1">AYUSH</span>
+        <span class="name-line name-line-2">NEGI</span>
+      </h1>
+
+      <div class="hero-role">
+        <span class="role-prefix">$ run </span>
+        <span class="typed-text" id="typedText"></span>
+        <span class="typed-cursor">▋</span>
+      </div>
+
+      <p class="hero-desc">
+        B.Tech CSE @ <strong>Graphic Era Hill University, Dehradun</strong>.
+        Engineering blockchain protocols, low-level C systems, and full-stack
+        applications — with focus on <strong>performance, security &amp; real-world impact</strong>.
+      </p>
+
+      <div class="hero-badges">
+        <span class="gate-pill">🏆 GATE 2026 QUALIFIED</span>
+      </div>
+
+      <div class="cta-row">
+        <button class="cta-primary" onclick="go('projects')">
+          <span>View Projects</span>
+          <span class="cta-arrow">→</span>
+        </button>
+        <button class="cta-secondary" onclick="go('contact')">Get In Touch</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: FLIP CARD (replaces terminal) -->
+    <div class="hero-right">
+
+      <p class="flip-hint">hover to reveal photo ↗</p>
+
+      <div class="flip-card" id="heroFlipCard">
+        <div class="flip-card-inner">
+
+          <!-- FRONT: stats card -->
+          <div class="flip-card-front">
+            <!-- card chrome bar -->
+            <div class="fc-bar">
+              <span class="t-dot t-red"></span>
+              <span class="t-dot t-yellow"></span>
+              <span class="t-dot t-green"></span>
+              <span class="fc-bar-title">[AN] profile.json</span>
+            </div>
+
+            <div class="fc-body">
+              <div class="fc-avatar">🧑‍💻</div>
+              <div class="fc-name">Ayush Negi</div>
+              <div class="fc-role">B.Tech CSE &nbsp;·&nbsp; 2023–2027</div>
+
+              <div class="fc-divider"></div>
+
+              <!-- stat grid injected by JS -->
+              <div class="fc-stats" id="heroStats"></div>
+
+              <div class="fc-divider"></div>
+
+              <div class="fc-badge">
+                <span>🏅</span>&nbsp; GATE 2026 Qualified — IIT Bombay
+              </div>
+
+              <div class="fc-footer">
+                <span class="fc-status-dot"></span>
+                <span class="fc-status-txt">Open to opportunities &amp; collaborations</span>
+              </div>
+            </div>
+          </div><!-- /front -->
+
+          <!-- BACK: photo -->
+          <div class="flip-card-back">
+            <!--
+              ── HOW TO ADD YOUR PHOTO ──────────────────────────
+              1. Drop your image into the /assets/ folder
+              2. Rename it  photo.jpg  (or .png / .webp)
+              3. Update the src below to match, e.g.:
+                    src="assets/photo.jpg"
+              ────────────────────────────────────────────────── -->
+            <img
+              src="assets/photo.png"
+              alt="Ayush Negi"
+              class="fc-photo"
+              onerror="this.style.display='none';
+                       document.getElementById('fcFallback').style.display='flex';"
+            />
+
+            <!-- Shown only if photo is missing -->
+            <div class="fc-fallback" id="fcFallback">
+              <span style="font-size:64px">🧑‍💻</span>
+              <p class="fc-fallback-txt">
+                Add your photo to<br>
+                <strong style="color:var(--accent)">assets/photo.jpg</strong>
+              </p>
+            </div>
+
+            <!-- Overlay at the bottom -->
+            <div class="fc-overlay">
+              <div class="fc-overlay-name">Ayush Negi</div>
+              <div class="fc-overlay-tag">CS Student · Builder · GATE ✓</div>
+            </div>
+          </div><!-- /back -->
+
+        </div><!-- /inner -->
+      </div><!-- /flip-card -->
+
+    </div><!-- /hero-right -->
+
+  </div><!-- /hero-content -->
+
+  <div class="scroll-hint">
+    <div class="scroll-line-anim"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ░░ ABOUT ░░ -->
+<section id="about">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 01 — ABOUT</span>
+      <h2 class="sec-title">Who I Am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a Computer Science student who genuinely enjoys the craft of building things — from writing <strong>bare-metal C servers</strong> to deploying <strong>smart contracts on Ethereum</strong>. I care deeply about how software works at a systems level.</p>
+        <p>Beyond the code, I've qualified <strong>GATE 2026</strong>, participated in hackathons, and volunteered through NSS — because growth isn't just technical.</p>
+        <p>Currently exploring the intersection of <strong>distributed systems and blockchain technology</strong>, always looking for challenging problems worth solving.</p>
+        <div class="about-stats" id="aboutStats"></div>
+      </div>
+      <div class="about-traits reveal">
+        <div class="traits-card">
+          <div class="traits-header">
+            <span class="mono-sm">CORE_STRENGTHS.json</span>
+          </div>
+          <div class="traits-body" id="traitsBody"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ PESE ░░ -->
+<section id="pese">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 02 — PESE LAB</span>
+      <h2 class="sec-title">Professional &amp; Employability Skills</h2>
+    </div>
+    <p class="pese-intro reveal">
+      This semester's PESE program covered practical career skills through a mix of theory and hands-on sessions — mock interviews, GDs, and real-world scenarios.
+    </p>
+    <div class="pese-grid" id="peseGrid"></div>
+  </div>
+</section>
+
+<!-- ░░ SKILLS ░░ -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 03 — SKILLS</span>
+      <h2 class="sec-title">Tech Stack</h2>
+    </div>
+    <div class="skills-layout">
+      <div class="skills-bars reveal" id="skillsBars"></div>
+      <div class="skills-chips-wrap reveal">
+        <p class="chips-heading">CONCEPTS &amp; TOOLS</p>
+        <div class="chips-grid" id="chipsGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ PROJECTS ░░ -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 04 — PROJECTS</span>
+      <h2 class="sec-title">Featured Work</h2>
+    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- ░░ CERTIFICATIONS ░░ -->
+<section id="certification">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 05 — JOURNEY</span>
+      <h2 class="sec-title">Education &amp; Certifications</h2>
+    </div>
+    <div class="timeline-wrap" id="timelineWrap"></div>
+  </div>
+</section>
+
+<!-- ░░ CONTACT ░░ -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">// 06 — CONTACT</span>
+      <h2 class="sec-title">Let's Connect</h2>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <p class="contact-tagline">Have a project, idea, or just want to talk code? My inbox is always open.</p>
+        <div class="contact-links" id="contactLinks"></div>
+      </div>
+      <div class="contact-form-wrap reveal">
+        <div id="formArea">
+          <form id="contactForm">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>NAME</label>
+                <input type="text" placeholder="Your name" required/>
+              </div>
+              <div class="form-group">
+                <label>EMAIL</label>
+                <input type="email" placeholder="your@email.com" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>MESSAGE</label>
+              <textarea placeholder="Tell me about your project or just say hi…" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              <span>Send Message</span> <span>→</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="logo"><span class="logo-bracket">[</span>AN<span class="logo-bracket">]</span></span>
+      <p class="footer-copy">
+        © <span id="yr"></span> Ayush Negi &nbsp;·&nbsp; B.Tech CSE
+        &nbsp;·&nbsp; Graphic Era Hill University, Dehradun
+      </p>
+      <p class="footer-visitors">
+        <span class="mono-sm">VISITORS: <span id="visitorCount">—</span></span>
+      </p>
+    </div>
+    <nav class="footer-nav" id="footerNav"></nav>
+  </div>
+</footer>
+
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

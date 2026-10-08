@@ -66,7 +66,7 @@
   })();
 
   document.querySelectorAll(
-    'a, button, input, textarea, .chip, .pr-card, .pese-card, .flip-card'
+    'a, button, input, textarea, .chip, .pr-card, .flip-card'
   ).forEach(el => {
     el.addEventListener('mouseenter', () => {
       ring.style.width  = '52px';
@@ -116,7 +116,7 @@ function go(id) {
   const footerNav = document.getElementById('footerNav');
 
   const labels = {
-    home: '~/home', about: '~/about', pese: '~/pese',
+    home: '~/home', about: '~/about',
     skills: '~/skills', projects: '~/projects',
     certification: '~/certs', contact: '~/contact',
   };
@@ -235,7 +235,7 @@ function go(id) {
 /* ────────────────────────────────────────────────────
    PESE — flip cards (front: bullet points, back: YouTube embed)
 ──────────────────────────────────────────────────── */
-function extractYoutubeId(raw) {
+/*function extractYoutubeId(raw) {
   if (raw == null || raw === '') return null;
   const s = String(raw).trim();
   if (!s) return null;
@@ -255,7 +255,6 @@ function extractYoutubeId(raw) {
       if (id && /^[a-zA-Z0-9_-]{11}$/.test(id)) return id;
     }
   } catch {
-    /* ignore */
   }
   return null;
 }
@@ -344,6 +343,7 @@ function extractYoutubeId(raw) {
     }
   });
 })();
+*/
 
 
 /* ────────────────────────────────────────────────────

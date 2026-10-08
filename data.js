@@ -7,7 +7,7 @@ const DATA = {
   supabaseUrl: "https://sdabzuqkhkpjdaopygmk.supabase.co",
   supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkYWJ6dXFraGtwamRhb3B5Z21rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTUwODMsImV4cCI6MjA5MjYzMTA4M30.BNMvgQxVyaTBV1iRKFLPn59IvMcFzStYCe5JzfHalj8",
 
-  navIds: ['home', 'about', 'pese', 'skills', 'projects', 'certification', 'contact'],
+  navIds: ['home', 'about', 'skills', 'projects', 'certification', 'contact'],
 
   /* PDF in /assets — opens in a new tab */
   resumePdf: 'assets/resume__1_ (3).pdf',
@@ -134,7 +134,7 @@ const DATA = {
    *
    * Leave videoId as null/falsy to hide the flip behaviour for that card.
    * You can paste the raw 11-character ID OR a full youtube.com / youtu.be link.
-   */
+  
   pese: [
     {
       num: '01', title: 'Self Introduction',
@@ -203,6 +203,7 @@ const DATA = {
       ],
     },
   ],
+   */
 
   /* ── SOCIALS ── */
   socials: [

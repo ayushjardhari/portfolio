@@ -516,52 +516,64 @@ function go(id) {
 
 
 
-/* ────────────────────────────────────────────────────
-   CONTACT FORM — EmailJS
-──────────────────────────────────────────────────── */
+
+/* CONTACT FORM — Cloudflare Worker + Turnstile */
+
+
 (function initForm() {
   const form = document.getElementById('contactForm');
-  if (!form || !window.emailjs) {
-    console.error('Contact form or EmailJS SDK not found.');
-    return;
-  }
+  if (!form) return;
 
-  emailjs.init({
-    publicKey: 'Q2_mx6jOcH9BEhTuo'
-  });
+  const WORKER_URL = 'https://portfolio.ayushneigh524.workers.dev';
 
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = form.querySelector('input[type="text"]').value.trim();
     const email = form.querySelector('input[type="email"]').value.trim();
     const message = form.querySelector('textarea').value.trim();
-
     const button = form.querySelector('button[type="submit"]');
-    const originalButtonText = button.innerHTML;
 
     if (!name || !email || !message) {
       form.reportValidity();
       return;
     }
 
+    if (!window.turnstile) {
+      showError('Verification is still loading. Please refresh and try again.');
+      return;
+    }
+
+    const turnstileToken = window.turnstile.getResponse();
+
+    if (!turnstileToken) {
+      showError('Please complete the human verification first.');
+      return;
+    }
+
+    const originalButtonText = button.innerHTML;
     button.disabled = true;
     button.innerHTML = '<span>Sending...</span>';
 
     try {
-      await emailjs.send(
-        'service_2hifwbf',
-        'template_yph7icu',
-        {
-          name: name,
-          email: email,
-          message: message
-        }
-      );
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          turnstileToken
+        })
+      });
 
-      const area = document.getElementById('formArea');
+      const result = await response.json();
 
-      area.innerHTML = `
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Message could not be sent.');
+      }
+
+      document.getElementById('formArea').innerHTML = `
         <div class="ok-box" role="status" aria-live="polite">
           <div style="font-size:52px;margin-bottom:16px">✓</div>
           <h3>Message Sent!</h3>
@@ -569,25 +581,34 @@ function go(id) {
         </div>`;
 
     } catch (error) {
-      console.error('EmailJS error:', error);
-
-      let errorBox = form.querySelector('.form-error');
-
-      if (!errorBox) {
-        errorBox = document.createElement('p');
-        errorBox.className = 'form-error';
-        errorBox.setAttribute('role', 'alert');
-        form.appendChild(errorBox);
-      }
-
-      errorBox.textContent =
-        'Message could not be sent. Please try again or email ayushnegi23011784@gmail.com directly.';
+      console.error('Contact form error:', error);
+      showError(
+        error.message || 'Message could not be sent. Please try again.'
+      );
 
       button.disabled = false;
       button.innerHTML = originalButtonText;
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
     }
   });
+
+  function showError(message) {
+    let errorBox = form.querySelector('.form-error');
+
+    if (!errorBox) {
+      errorBox = document.createElement('p');
+      errorBox.className = 'form-error';
+      errorBox.setAttribute('role', 'alert');
+      form.appendChild(errorBox);
+    }
+
+    errorBox.textContent = message;
+  }
 })();
+
 
 
 /* ────────────────────────────────────────────────────

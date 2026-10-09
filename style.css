@@ -1071,6 +1071,18 @@ input:focus, textarea:focus {
 input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.6; }
 textarea { resize: vertical; }
 
+.cf-turnstile {
+  margin: 16px 0;
+  min-height: 65px;
+}
+
+.form-error {
+  color: var(--red);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
 .form-submit {
   display: flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; padding: 14px;

@@ -282,9 +282,16 @@
               <label>MESSAGE</label>
               <textarea placeholder="Tell me about your project or just say hi…" rows="5" required></textarea>
             </div>
-            <button type="submit" class="form-submit">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAFSJBScTfr7WfOLn"
+              data-theme="dark"
+            >
+              <button type="submit" class="form-submit">
               <span>Send Message</span> <span>→</span>
-            </button>
+              </button>
+            </div>
+            
           </form>
         </div>
       </div>
@@ -313,6 +320,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
 <script src="data.js"></script>
 <script src="main.js"></script>
 </body>

@@ -207,10 +207,10 @@ const DATA = {
 
   /* ── SOCIALS ── */
   socials: [
-    { icon: '🐙', label: 'GitHub',   detail: 'github.com/ayushnegi',   href: 'https://github.com/' },
-    { icon: '💼', label: 'LinkedIn', detail: 'linkedin.com/in/ayush',   href: 'https://linkedin.com/' },
-    { icon: '📧', label: 'Email',    detail: 'ayush@example.com',        href: 'mailto:ayush@example.com' },
-    { icon: '𝕏',  label: 'Twitter',  detail: '@ayush_negi',              href: 'https://twitter.com/' },
+    { icon: '🐙', label: 'GitHub',   detail: 'github.com/ayushnegi',   href: 'https://github.com/Ayu5hNegi' },
+    { icon: '💼', label: 'LinkedIn', detail: 'linkedin.com/in/ayush',   href: 'https://www.linkedin.com/in/ayush-negi-909696297/' },
+    { icon: '📧', label: 'Email',    detail: 'ayushneig524@gmail.com',        href: 'mailto:ayushneig524@gmail.com' },
+    { icon: '𝕏',  label: 'Twitter',  detail: '@Ayu_sh_Negi',              href: 'https://x.com/Ayu_sh_Negi' },
   ],
 
   /* ── HERO FLIP CARD — front stats ── */

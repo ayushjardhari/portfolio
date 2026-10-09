@@ -524,7 +524,7 @@ function go(id) {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
-  const WORKER_URL = 'https://portfolio.ayushneigh524.workers.dev';
+  const WORKER_URL = 'https://portfolio.ayushneig524.workers.dev';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

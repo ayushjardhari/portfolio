@@ -515,40 +515,78 @@ function go(id) {
 })();
 
 
+
 /* ────────────────────────────────────────────────────
-   CONTACT FORM
+   CONTACT FORM — EmailJS
 ──────────────────────────────────────────────────── */
 (function initForm() {
-  function attachForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+  const form = document.getElementById('contactForm');
+  if (!form || !window.emailjs) {
+    console.error('Contact form or EmailJS SDK not found.');
+    return;
+  }
+
+  emailjs.init({
+    publicKey: 'Q2_mx6jOcH9BEhTuo'
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const message = form.querySelector('textarea').value.trim();
+
+    const button = form.querySelector('button[type="submit"]');
+    const originalButtonText = button.innerHTML;
+
+    if (!name || !email || !message) {
+      form.reportValidity();
+      return;
+    }
+
+    button.disabled = true;
+    button.innerHTML = '<span>Sending...</span>';
+
+    try {
+      await emailjs.send(
+        'service_2hifwbf',
+        'template_yph7icu',
+        {
+          name: name,
+          email: email,
+          message: message
+        }
+      );
+
       const area = document.getElementById('formArea');
+
       area.innerHTML = `
-        <div class="ok-box">
+        <div class="ok-box" role="status" aria-live="polite">
           <div style="font-size:52px;margin-bottom:16px">✓</div>
           <h3>Message Sent!</h3>
-          <p>Thanks for reaching out — I'll get back to you shortly.</p>
+          <p>Thanks for reaching out — your message was sent successfully.</p>
         </div>`;
-      setTimeout(() => {
-        area.innerHTML = `
-          <form id="contactForm">
-            <div class="form-row-2">
-              <div class="form-group"><label>NAME</label><input type="text" placeholder="Your name" required/></div>
-              <div class="form-group"><label>EMAIL</label><input type="email" placeholder="your@email.com" required/></div>
-            </div>
-            <div class="form-group">
-              <label>MESSAGE</label>
-              <textarea placeholder="Tell me about your project or just say hi…" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="form-submit"><span>Send Message</span><span>→</span></button>
-          </form>`;
-        attachForm();
-      }, 5000);
-    });
-  }
-  attachForm();
+
+    } catch (error) {
+      console.error('EmailJS error:', error);
+
+      let errorBox = form.querySelector('.form-error');
+
+      if (!errorBox) {
+        errorBox = document.createElement('p');
+        errorBox.className = 'form-error';
+        errorBox.setAttribute('role', 'alert');
+        form.appendChild(errorBox);
+      }
+
+      errorBox.textContent =
+        'Message could not be sent. Please try again or email ayushnegi23011784@gmail.com directly.';
+
+      button.disabled = false;
+      button.innerHTML = originalButtonText;
+    }
+  });
 })();
 
 
